@@ -1,3 +1,5 @@
+import * as process from "process";
+
 const { faker } = require('@faker-js/faker');
 
 const fake_users = Array(10)
@@ -5,10 +7,11 @@ const fake_users = Array(10)
   .map((_, index) => ({
     id: index + 1,
     email: faker.internet.email().toLowerCase(),
-    password: faker.internet.password().toString(),
+    password: process.env.DEFAULT_PASSWORD,
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
-    phone: faker.phone.number('+34-###-###-###').toString(),
+    phone: faker.phone.number('###-###-###').toString(),
+    country_code: '34',
     address: faker.location.streetAddress(),
     role: faker.helpers.arrayElement(['admin', 'user']),
     status: faker.helpers.arrayElement(['active', 'inactive']),
