@@ -1,8 +1,9 @@
-import * as process from "process";
+import * as process from 'process';
+import { faker } from '@faker-js/faker';
 
-const { faker } = require('@faker-js/faker');
+console.log('SEED_USERS');
 
-const fake_users = Array(10)
+export const fake_users = Array(10)
   .fill(null)
   .map((_, index) => ({
     id: index + 1,

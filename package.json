@@ -26,6 +26,8 @@
     "db:migrate:make": "npx knex --knexfile ./src/database/knexfile.ts migrate:make $1 -x ts",
     "db:migrate:latest": "npx knex --knexfile ./src/database/knexfile.ts migrate:latest",
     "db:seed": "npx knex --knexfile ./src/database/knexfile.ts seed:run",
+    "db:seed:file": "npx knex --knexfile ./src/database/knexfile.ts seed:run --specific $1",
+    "db:rollback:all": "npx knex --knexfile ./src/database/knexfile.ts migrate:rollback --all",
     "db:rollback": "npx knex --knexfile ./src/database/knexfile.ts migrate:rollback"
   },
   "author": "anton kalik",
@@ -36,6 +38,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.2",
     "openai": "^3.2.1",
     "pg": "^8.10.0"
