@@ -1,14 +1,12 @@
 import * as process from 'process';
+import bcrypt from 'bcrypt';
 import { faker } from '@faker-js/faker';
-
-console.log('SEED_USERS');
 
 export const fake_users = Array(10)
   .fill(null)
   .map((_, index) => ({
     id: index + 1,
     email: faker.internet.email().toLowerCase(),
-    password: process.env.DEFAULT_PASSWORD,
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     phone: faker.phone.number('###-###-###').toString(),
@@ -20,5 +18,6 @@ export const fake_users = Array(10)
 
 exports.seed = async function (knex) {
   await knex('user').del();
-  await knex('user').insert(fake_users);
+  const hashed_password = await bcrypt.hash(process.env.DEFAULT_PASSWORD, 10);
+  await knex('user').insert(fake_users.map(user => ({ ...user, password: hashed_password })));
 };
