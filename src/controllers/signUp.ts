@@ -1,18 +1,47 @@
 import bcrypt from 'bcrypt';
-import User from 'src/models/User';
+import jwt from 'jsonwebtoken';
+import { validate } from 'src/helpers/validation/validate';
+import { userSchema } from 'src/helpers/validation/schemas/userSchema';
+import User, { UserType } from 'src/models/User';
+
+type SignUpPayload = Omit<UserType, 'id' | 'role' | 'status' | 'created_at' | 'updated_at'>;
 
 export async function signUp(req, res) {
-  const { email, password } = req.body;
+  const { email, password, first_name, last_name, country_code, phone, address }: SignUpPayload =
+    req.body;
+
+  const validation = validate<SignUpPayload>(req.body, userSchema);
+
+  if (!validation.isValid) {
+    return res.status(400).send(`Invalid ${validation.invalidKey}`);
+  }
 
   const user = await User.findBy({ email });
 
-  if (!user) {
-    return res.status(403).send({ message: 'Invalid email or password' });
+  console.log('user', user);
+
+  if (user) {
+    return res.status(403).send({ message: 'User already exist' });
   }
 
-  await User.update(user.id, {
-    password: await bcrypt.hash(password, 10),
+  const hashedPassword = (await bcrypt.hash(password, 10)) as string;
+  const createdUser = await User.create<SignUpPayload>({
+    email,
+    password: hashedPassword,
+    first_name,
+    last_name,
+    country_code,
+    phone,
+    address,
   });
 
-  res.status(200).send({ message: 'User created!' });
+  const token = jwt.sign(
+    {
+      id: createdUser.id,
+      email: createdUser.email,
+    },
+    process.env.JWT_SECRET as string
+  );
+
+  res.status(200).json({ token });
 }

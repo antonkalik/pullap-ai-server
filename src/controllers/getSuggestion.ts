@@ -9,13 +9,13 @@ export const getSuggestion = async (req: Request, res: Response) => {
     //   model: 'gpt-3.5-turbo',
     //   prompt: 'How are you today?',
     // });
-    const result = await database
-      .select('age', 'weight', 'height', 'user_id')
-      .from('user')
-      .join('indicator', 'user.id', '=', 'indicator.user_id');
+    // const result = await database
+    //   .select('age', 'weight', 'height', 'user_id')
+    //   .from('user')
+    //   .join('indicator', 'user.id', '=', 'indicator.user_id');
 
     // console.log('result', completion.data);
-    console.log('result', result);
+    // console.log('result', result);
     res.json({
       data: 'hi',
     });

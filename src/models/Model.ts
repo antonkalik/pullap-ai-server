@@ -10,7 +10,7 @@ export class Model<T> {
     this.database = database;
   }
 
-  async create(data) {
+  async create<Data>(data: Data) {
     return this.database(this.tableName).insert(data).returning<T>('*');
   }
 

@@ -19,12 +19,12 @@ export async function login(req, res) {
         return res.status(403).send({ message: 'Invalid email or password' });
       }
 
-      const token = jwt.sign(
+      const token: string = jwt.sign(
         {
           id: user.id,
           email: user.email,
         },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET as string
       );
       res.status(200).json({ token });
     } else {

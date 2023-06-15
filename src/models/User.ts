@@ -1,10 +1,11 @@
 import { Model } from 'src/models/Model';
+import { Role, Status } from 'src/@types';
 
-interface UserType {
+export interface UserType {
   id: number;
   email: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   password: string;
   country_code: string;
   phone: string;

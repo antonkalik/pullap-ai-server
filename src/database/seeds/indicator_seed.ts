@@ -1,8 +1,6 @@
 import { fake_users } from './user_seed';
 import { faker } from '@faker-js/faker';
 
-console.log('INDICATOR_SEED');
-
 const fake_indicators = fake_users.map((user, index) => ({
   id: index + 1,
   age: faker.number.int({ min: 1, max: 100 }),
