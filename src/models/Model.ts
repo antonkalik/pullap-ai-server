@@ -11,7 +11,8 @@ export class Model {
   }
 
   public static async insert<Payload, Result>(data: Payload): Promise<Result> {
-    return this.table.insert(data).returning('*').first();
+    const [result] = await this.table.insert(data).returning('*');
+    return result;
   }
 
   public static async update(id, data) {

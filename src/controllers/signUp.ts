@@ -30,7 +30,7 @@ export async function signUp(req, res) {
     last_name,
     country_code,
     phone,
-    address,
+    address
   });
 
   res.status(200).json({

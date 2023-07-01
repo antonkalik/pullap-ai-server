@@ -1,8 +1,8 @@
-import { Model } from "src/models/Model";
+import { Model } from 'src/models/Model';
 import { Role, Status } from 'src/@types';
 
 export interface UserType {
-  id: string,
+  id: string;
   email: string;
   first_name: string;
   last_name: string;
@@ -16,11 +16,24 @@ export interface UserType {
   updated_at: Date;
 }
 
+type DefaultUserData = {
+  role: string;
+  status: string;
+};
+
+const defaultUserData = {
+  role: 'user',
+  status: 'active',
+};
+
 export class User extends Model {
   static tableName = 'user';
 
   public static async create<Payload>(data: Payload) {
-    return super.insert<Payload, UserType>(data);
+    return super.insert<Payload & DefaultUserData, UserType>({
+      ...data,
+      ...defaultUserData,
+    });
   }
 
   public static findByEmail(email: string) {
