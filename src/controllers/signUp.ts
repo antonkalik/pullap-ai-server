@@ -2,9 +2,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { validate } from 'src/helpers/validation/validate';
 import { userSchema } from 'src/helpers/validation/schemas/userSchema';
-import User, { UserType } from 'src/models/User';
+import { UserType, User } from 'src/models/User';
 
-type SignUpPayload = Omit<UserType, 'id' | 'role' | 'status' | 'created_at' | 'updated_at'>;
+type SignUpPayload = Omit<UserType, 'id' | 'created_at' | 'updated_at' | 'role' | 'status'>;
 
 export async function signUp(req, res) {
   const { email, password, first_name, last_name, country_code, phone, address }: SignUpPayload =
@@ -17,8 +17,6 @@ export async function signUp(req, res) {
   }
 
   const user = await User.findBy({ email });
-
-  console.log('user', user);
 
   if (user) {
     return res.status(403).send({ message: 'User already exist' });
@@ -35,13 +33,13 @@ export async function signUp(req, res) {
     address,
   });
 
-  const token = jwt.sign(
-    {
-      id: createdUser.id,
-      email: createdUser.email,
-    },
-    process.env.JWT_SECRET as string
-  );
-
-  res.status(200).json({ token });
+  res.status(200).json({
+    token: jwt.sign(
+      {
+        id: createdUser.id,
+        email: createdUser.email,
+      },
+      process.env.JWT_SECRET as string
+    ),
+  });
 }

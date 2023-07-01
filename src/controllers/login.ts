@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import User from 'src/models/User';
+import { User, UserType } from 'src/models/User';
+
+type SignInPayload = {
+  email: string;
+};
 
 export async function login(req, res) {
   const { email, password } = req.body;
@@ -10,7 +14,7 @@ export async function login(req, res) {
   }
 
   try {
-    const user = await User.findBy({ email });
+    const user = await User.findBy<SignInPayload, UserType>({ email });
 
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
@@ -30,7 +34,8 @@ export async function login(req, res) {
     } else {
       return res.status(403).send({ message: 'Invalid email or password' });
     }
-  } catch {
+  } catch(error) {
+    console.error("SERVER_ERROR", error);
     return res.status(500).send({ message: 'Something went wrong' });
   }
 }

@@ -1,32 +1,32 @@
-import type { Knex } from 'knex';
 import { database } from 'src/database';
 
-export class Model<T> {
-  protected tableName: string;
-  protected database: Knex;
+export class Model {
+  static tableName: string;
 
-  protected constructor(tableName: string) {
-    this.tableName = tableName;
-    this.database = database;
+  private static get table() {
+    if (!this.tableName) {
+      throw new Error('You must set a table name!');
+    }
+    return database(this.tableName);
   }
 
-  async create<Data>(data: Data) {
-    return this.database(this.tableName).insert(data).returning<T>('*');
+  public static async insert<Payload, Result>(data: Payload): Promise<Result> {
+    return this.table.insert(data).returning('*').first();
   }
 
-  async update(id, data) {
-    return this.database(this.tableName).where({ id }).update(data).returning<T>('*');
+  public static async update(id, data) {
+    return this.table.where({ id }).update(data).returning('*');
   }
 
-  async delete(id) {
-    return this.database(this.tableName).where({ id }).del();
+  public static async delete(id: string) {
+    return this.table.where({ id }).del();
   }
 
-  async findById(id) {
-    return this.database(this.tableName).where('id', id).first<T>();
+  public static async findById<Result>(id: string): Promise<Result> {
+    return this.table.where('id', id).first();
   }
 
-  async findBy(data) {
-    return this.database(this.tableName).where(data).first<T>();
+  public static async findBy<Payload, Result>(data: Payload): Promise<Result | null> {
+    return this.table.where(data as string).first();
   }
 }

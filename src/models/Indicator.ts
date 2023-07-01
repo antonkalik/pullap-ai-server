@@ -1,17 +1,5 @@
-import { Model } from 'src/models/Model';
+import { Model } from "src/models/Model";
 
-interface IndicatorType {
-  id: number;
-  age: number;
-  weight: number;
-  height: number;
-  user_id: number;
+export class Indicator extends Model {
+  static tableName = 'indicator';
 }
-
-class Indicator extends Model<IndicatorType> {
-  constructor() {
-    super('indicator');
-  }
-}
-
-export default new Indicator();

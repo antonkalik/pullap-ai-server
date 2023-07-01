@@ -1,8 +1,8 @@
-import { Model } from 'src/models/Model';
+import { Model } from "src/models/Model";
 import { Role, Status } from 'src/@types';
 
 export interface UserType {
-  id: number;
+  id: string,
   email: string;
   first_name: string;
   last_name: string;
@@ -16,10 +16,18 @@ export interface UserType {
   updated_at: Date;
 }
 
-class User extends Model<UserType> {
-  constructor() {
-    super('user');
+export class User extends Model {
+  static tableName = 'user';
+
+  public static async create<Payload>(data: Payload) {
+    return super.insert<Payload, UserType>(data);
+  }
+
+  public static findByEmail(email: string) {
+    return this.findBy({ email });
+  }
+
+  public static findByPhone(phone: string) {
+    return this.findBy({ phone });
   }
 }
-
-export default new User();
