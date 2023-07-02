@@ -1,5 +1,5 @@
 import { Model } from "src/models/Model";
 
-export class Indicator extends Model {
+export class IndicatorModel extends Model {
   static tableName = 'indicator';
 }

@@ -1,4 +1,4 @@
-import { UserType } from "src/models/User";
+import { UserType } from "src/models/UserModel";
 
 export type Role = 'admin' | 'user';
 export type Status = 'active' | 'inactive';

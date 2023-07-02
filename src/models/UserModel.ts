@@ -1,6 +1,11 @@
 import { Model } from 'src/models/Model';
 import { Role, Status } from 'src/@types';
 
+type DefaultUserData = {
+  role: string;
+  status: string;
+};
+
 export interface UserType {
   id: string;
   email: string;
@@ -16,17 +21,12 @@ export interface UserType {
   updated_at: Date;
 }
 
-type DefaultUserData = {
-  role: string;
-  status: string;
-};
-
 const defaultUserData = {
   role: 'user',
   status: 'active',
 };
 
-export class User extends Model {
+export class UserModel extends Model {
   static tableName = 'user';
 
   public static async create<Payload>(data: Payload) {

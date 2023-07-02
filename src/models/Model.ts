@@ -15,8 +15,9 @@ export class Model {
     return result;
   }
 
-  public static async update(id, data) {
-    return this.table.where({ id }).update(data).returning('*');
+  public static async update<Payload, Result>(id: string, data: Payload): Promise<Result> {
+    const [result] = await this.table.where({ id }).update(data).returning('*');
+    return result;
   }
 
   public static async delete(id: string) {

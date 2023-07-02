@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { User, UserType } from 'src/models/User';
+import { UserModel, UserType } from 'src/models/UserModel';
 
 type SignInPayload = {
   email: string;
@@ -14,7 +14,7 @@ export async function loginController(req, res) {
   }
 
   try {
-    const user = await User.findBy<SignInPayload, UserType>({ email });
+    const user = await UserModel.findBy<SignInPayload, UserType>({ email });
 
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
