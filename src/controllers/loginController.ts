@@ -6,7 +6,7 @@ type SignInPayload = {
   email: string;
 };
 
-export async function login(req, res) {
+export async function loginController(req, res) {
   const { email, password } = req.body;
 
   if (!email || !password) {

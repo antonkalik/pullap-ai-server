@@ -1,6 +1,10 @@
 import { Router } from 'express';
-import { getSuggestion } from 'src/controllers/getSuggestion';
+import { authRouter } from 'src/routes/authRouter';
+import { apiRouter } from 'src/routes/apiRouter';
+import { healthController } from 'src/controllers/healthController'
 
 export const router = Router();
 
-router.get('/suggestion', getSuggestion);
+router.get('/health', healthController);
+router.use('/auth', authRouter);
+router.use(apiRouter);

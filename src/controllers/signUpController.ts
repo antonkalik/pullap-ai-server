@@ -6,7 +6,7 @@ import { UserType, User } from 'src/models/User';
 
 type SignUpPayload = Omit<UserType, 'id' | 'created_at' | 'updated_at' | 'role' | 'status'>;
 
-export async function signUp(req, res) {
+export async function signUpController(req, res) {
   const { email, password, first_name, last_name, country_code, phone, address }: SignUpPayload =
     req.body;
 

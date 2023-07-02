@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 // import { openai } from 'src/configs/openai';
 import { database } from 'src/database';
 
-export const getSuggestion = async (req: Request, res: Response) => {
+export const suggestionController = async (req: Request, res: Response) => {
   try {
     // const completion = await openai.createChatCompletion({
     //   model: 'gpt-3.5-turbo',
