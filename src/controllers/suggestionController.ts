@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AxiosError } from 'axios';
 // import { openai } from 'src/configs/openai';
-import { database } from 'src/database';
+// import { database } from 'src/database';
 
 export const suggestionController = async (req: Request, res: Response) => {
   try {
