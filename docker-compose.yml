@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: postgres.dockerfile
     image: postgres:latest
-    container_name: postgres-pullap
+    container_name: postgres
     environment:
       TZ: Europe/Madrid
       POSTGRES_DB: ${DB_USER}
@@ -19,4 +19,12 @@ services:
       - data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    restart: unless-stopped
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - default
+    ports:
+      - "6379:6379"
     restart: unless-stopped

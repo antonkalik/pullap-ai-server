@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { signUpController } from 'src/controllers/signUpController';
 import { loginController } from 'src/controllers/loginController';
+import { logoutController } from 'src/controllers/logoutController';
 
 export const authRouter = Router();
 
