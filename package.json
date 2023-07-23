@@ -22,13 +22,7 @@
     "dev:build": "webpack --config webpack.config.js --watch",
     "dev:start": "nodemon --watch dist --exec node dist/bundle.js",
     "test": "NODE_ENV=test jest --config ./jest.config.js",
-    "lint": "eslint ./src -c .eslintrc.json",
-    "db:migrate:make": "npx knex --knexfile ./src/database/knexfile.ts migrate:make $1 -x ts",
-    "db:migrate:latest": "npx knex --knexfile ./src/database/knexfile.ts migrate:latest",
-    "db:seed": "npx knex --knexfile ./src/database/knexfile.ts seed:run",
-    "db:seed:file": "npx knex --knexfile ./src/database/knexfile.ts seed:run --specific $1",
-    "db:rollback:all": "npx knex --knexfile ./src/database/knexfile.ts migrate:rollback --all",
-    "db:rollback": "npx knex --knexfile ./src/database/knexfile.ts migrate:rollback"
+    "lint": "eslint ./src -c .eslintrc.json"
   },
   "author": "anton kalik",
   "license": "MIT",

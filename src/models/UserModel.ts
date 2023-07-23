@@ -3,7 +3,6 @@ import { Role, Status } from 'src/@types';
 
 type DefaultUserData = {
   role: string;
-  status: string;
 };
 
 export interface UserType {
@@ -16,9 +15,6 @@ export interface UserType {
   phone: string;
   address: string;
   role: Role;
-  status: Status;
-  created_at: Date;
-  updated_at: Date;
 }
 
 const defaultUserData = {
