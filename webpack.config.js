@@ -13,18 +13,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts(x?)$/,
+        test: /\.ts$/,
         exclude: /(node_modules|bower_components)/,
-        use: [
-          {
-            loader: 'ts-loader',
-          },
-        ],
+        use: 'ts-loader',
       },
+      {
+        test: /\.sql$/i,
+        exclude: /(node_modules|bower_components)/,
+        use: 'raw-loader',
+      }
     ],
   },
   resolve: {
-    extensions: ['.ts', '.json'],
+    extensions: ['.ts', '.json', '.sql'],
     alias: {
       src: path.resolve(__dirname, 'src/'),
     },

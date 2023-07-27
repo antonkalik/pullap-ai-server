@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
+import { Knex } from 'knex';
 
 const tableName = 'indicators';
 
-exports.seed = async function (knex) {
+exports.seed = async function (knex: Knex) {
   await knex(tableName).del();
 
   const usersIds = await knex('users').select('id');

@@ -1,13 +1,20 @@
+require('dotenv').config({
+  path: '../../.env',
+});
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { Request, Response } from 'express';
 import { UserModel, UserType } from 'src/models/UserModel';
 
 type SignInPayload = {
   email: string;
 };
 
-export async function loginController(req, res) {
+export async function loginController(req: Request, res: Response) {
   const { email, password } = req.body;
+
+  console.log("email", email);
+  console.log("password", password);
 
   if (!email || !password) {
     return res.status(403).send({ message: 'Invalid email or password' });
@@ -28,7 +35,7 @@ export async function loginController(req, res) {
           id: user.id,
           email: user.email,
         },
-        process.env.JWT_SECRET as string
+        process.env.JWT_SECRET
       );
       res.status(200).json({ token });
     } else {
