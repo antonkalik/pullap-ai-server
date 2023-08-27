@@ -2,10 +2,16 @@ export declare global {
   namespace NodeJS {
     interface ProcessEnv extends IProcessEnv {}
   }
-  declare module '*.sql' {
+
+  export declare module "*.sql" {
     const value: string;
     export default value;
   }
+}
+
+export declare module "*.sql" {
+  const value: string;
+  export default value;
 }
 
 interface IProcessEnv {
@@ -14,4 +20,9 @@ interface IProcessEnv {
   PORT: number;
 }
 
-export {};
+export global {
+  export declare module '*.sql' {
+    const value: string;
+    export default value;
+  }
+}

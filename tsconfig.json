@@ -9,15 +9,15 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
-    "typeRoots": ["node_modules/@types", "src/@types/**/*"],
+    "typeRoots": ["node_modules/@types", "src/@types"],
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "src/*": ["src/**/*"],
+      "src/*": ["src/*"]
     },
     "types": ["node", "jest"]
   },
-  "allowSyntheticDefaultImports": true,
-  "include": ["src/**/*", "*.sql"],
+//  "allowSyntheticDefaultImports": true,
+  "include": ["src/**/*", "src/sql/**/*.sql"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
