@@ -10,11 +10,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('username').notNullable();
     table.string('email').notNullable();
     table.string('password').notNullable();
-    table.string('phone');
-    table.string('country_code');
-    table.string('address_line_1');
-    table.string('address_line_2');
-    table.string('role').notNullable();
+    table.enu('role', ['user', 'admin']).notNullable();
     table.timestamps(true, true);
   });
 }

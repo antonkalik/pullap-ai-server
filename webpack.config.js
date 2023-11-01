@@ -17,17 +17,13 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: 'ts-loader',
       },
-      {
-        test: /\.sql$/i,
-        exclude: /(node_modules|bower_components)/,
-        use: 'raw-loader',
-      }
     ],
   },
   resolve: {
-    extensions: ['.ts', '.json', '.sql'],
+    extensions: ['.ts', '.json'],
     alias: {
       src: path.resolve(__dirname, 'src/'),
+      root: path.resolve(__dirname, './'),
     },
   },
   externals: [webpackNodeExternals()],

@@ -10,14 +10,16 @@
     "esModuleInterop": true,
     "strict": true,
     "typeRoots": ["node_modules/@types", "src/@types"],
+    "useUnknownInCatchVariables": false,
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "root/*": ["./*"],
     },
     "types": ["node", "jest"]
   },
-//  "allowSyntheticDefaultImports": true,
-  "include": ["src/**/*", "src/sql/**/*.sql"],
+  //  "allowSyntheticDefaultImports": true,
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

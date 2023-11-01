@@ -1,42 +1,31 @@
 import { Model } from 'src/models/Model';
-import { Role, Status } from 'src/@types';
-
-type DefaultUserData = {
-  role: string;
-};
-
-export interface UserType {
-  id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  password: string;
-  country_code: string;
-  phone: string;
-  address: string;
-  role: Role;
-}
-
-const defaultUserData = {
-  role: 'user',
-  status: 'active',
-};
+import { Role, User, DefaultUserData } from 'src/@types';
 
 export class UserModel extends Model {
-  static tableName = 'user';
+  static tableName = 'users';
 
   public static async create<Payload>(data: Payload) {
-    return super.insert<Payload & DefaultUserData, UserType>({
+    return super.insert<Payload & DefaultUserData>({
       ...data,
-      ...defaultUserData,
+      role: Role.User,
     });
   }
 
-  public static findByEmail(email: string) {
-    return this.findBy({ email });
+  public static findByEmail(email: string): Promise<User | null> {
+    return this.findOneBy<
+      {
+        email: string;
+      },
+      User
+    >({ email });
   }
 
-  public static findByPhone(phone: string) {
-    return this.findBy({ phone });
+  public static findByUsername(username: string): Promise<User | null> {
+    return this.findOneBy<
+      {
+        username: string;
+      },
+      User
+    >({ username });
   }
 }

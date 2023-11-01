@@ -7,12 +7,12 @@ services:
       context: .
       dockerfile: postgres.dockerfile
     image: postgres:latest
-    container_name: postgres
+    container_name: postgres-pullap
     environment:
       TZ: Europe/Madrid
-      POSTGRES_DB: ${DB_USER}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - default
     volumes:
@@ -22,7 +22,8 @@ services:
     restart: unless-stopped
   redis:
     image: redis:latest
-    container_name: redis
+    container_name: redis-pullap
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     networks:
       - default
     ports:
