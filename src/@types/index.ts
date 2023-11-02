@@ -1,3 +1,5 @@
+import { LifeStyle } from "src/constants/indicators";
+
 export enum Role {
   Admin = 'admin',
   User = 'user',
@@ -22,6 +24,10 @@ export type Indicator = {
   weight: number;
   height: number;
   run_distance: number;
+  run_time: number;
+  run_pace: number;
+  run_heart_rate: number;
+  life_style: LifeStyle;
   user_id: number;
 }
 

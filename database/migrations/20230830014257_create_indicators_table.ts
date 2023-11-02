@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { LIFESTYLE } from "../../src/constants/indicators";
+import { LifeStyle } from "../../src/constants/indicators";
 
 const tableName = 'indicators';
 
@@ -13,7 +13,7 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('run_time');
     table.integer('run_pace');
     table.integer('run_heart_rate');
-    table.enu('life_style', Object.values(LIFESTYLE)).notNullable();
+    table.enu('life_style', Object.values(LifeStyle)).notNullable();
     table.integer('user_id').unsigned().notNullable();
     table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE');
     table.timestamps(true, true);

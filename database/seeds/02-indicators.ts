@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker';
 import { Knex } from 'knex';
-import { LIFESTYLE } from '../../src/constants/indicators';
+import { LifeStyle } from '../../src/constants/indicators';
 
 const tableName = 'indicators';
 
 exports.seed = async function (knex: Knex) {
   await knex(tableName).del();
-  const lifeStyleValues = Object.values(LIFESTYLE);
+  const lifeStyleValues = Object.values(LifeStyle);
 
   const usersIds = await knex('users').select('id');
   const indicators = usersIds.map((user, index) => ({
