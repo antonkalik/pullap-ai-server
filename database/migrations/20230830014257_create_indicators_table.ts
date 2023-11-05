@@ -9,9 +9,6 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('age').notNullable();
     table.integer('weight').notNullable();
     table.integer('height').notNullable();
-    table.integer('run_distance');
-    table.integer('run_time');
-    table.integer('run_heart_rate');
     table.enu('life_style', Object.values(LifeStyle)).notNullable();
     table.integer('user_id').unsigned().notNullable();
     table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE');

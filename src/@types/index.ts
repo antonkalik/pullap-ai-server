@@ -1,4 +1,4 @@
-import { LifeStyle } from "src/constants/indicators";
+import { LifeStyle } from 'src/constants/indicators';
 
 export enum Role {
   Admin = 'admin',
@@ -23,13 +23,9 @@ export type Indicator = {
   age: number;
   weight: number;
   height: number;
-  run_distance: number;
-  run_time: number;
-  run_pace: number;
-  run_heart_rate: number;
   life_style: LifeStyle;
   user_id: number;
-}
+};
 
 export interface User extends DatabaseDate {
   id: number;
@@ -40,3 +36,12 @@ export interface User extends DatabaseDate {
   password: string;
   role: Role;
 }
+
+export type Activity = {
+  activity_type: string;
+  duration: number;
+  description: string;
+  water_consume: number;
+  distance?: number;
+  plan: string[];
+};
