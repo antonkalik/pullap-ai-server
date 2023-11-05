@@ -11,7 +11,6 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('height').notNullable();
     table.integer('run_distance');
     table.integer('run_time');
-    table.integer('run_pace');
     table.integer('run_heart_rate');
     table.enu('life_style', Object.values(LifeStyle)).notNullable();
     table.integer('user_id').unsigned().notNullable();
