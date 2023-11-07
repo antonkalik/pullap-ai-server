@@ -14,4 +14,18 @@ export class IndicatorModel extends Model {
       user_id: userId,
     });
   }
+
+  public static async updateByUserId(userId: number, data: Partial<Indicator>) {
+    return this.updateBy<
+      {
+        user_id: number;
+      },
+      Partial<Indicator>
+    >(
+      {
+        user_id: userId,
+      },
+      data
+    );
+  }
 }
