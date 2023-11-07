@@ -3,7 +3,7 @@ import { IndicatorModel } from 'src/models/IndicatorModel';
 
 export const updateIndicatorController = async (req: Request, res: Response) => {
   try {
-    await IndicatorModel.updateByUserId(req.user.id, {
+    const { id } = await IndicatorModel.updateByUserId(req.user.id, {
       age: req.body.age,
       weight: req.body.weight,
       height: req.body.height,
@@ -11,7 +11,7 @@ export const updateIndicatorController = async (req: Request, res: Response) => 
     });
 
     res.json({
-      message: 'Indicator updated',
+      id,
     });
   } catch (error: unknown) {
     console.log(error);
