@@ -5,7 +5,7 @@ import { getSportActivitySuggestion } from 'src/helpers/getSportActivitySuggesti
 export const getSuggestionController = async (req: Request, res: Response) => {
   try {
     const [indicator] = await IndicatorModel.findAllByUserId(req.user.id);
-    const result = await getSportActivitySuggestion(indicator, 2);
+    const result = await getSportActivitySuggestion(indicator);
 
     res.json({
       data: result,

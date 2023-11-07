@@ -25,8 +25,6 @@ export async function getSportActivitySuggestion(indicator: Indicator): Promise<
   - Lifestyle: ${indicator.life_style}
   `;
 
-  console.log(userPrompt);
-
   const completion = await openai.chat.completions.create({
     messages: [
       { role: 'system', content: systemPrompt },
@@ -35,6 +33,8 @@ export async function getSportActivitySuggestion(indicator: Indicator): Promise<
     model: 'gpt-3.5-turbo',
     temperature: 0.9,
   });
+
+  console.log(completion)
 
   return JSON.parse(completion.choices[0].message.content || '{}');
 }
