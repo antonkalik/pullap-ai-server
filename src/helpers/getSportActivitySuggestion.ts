@@ -2,7 +2,7 @@ import { Indicator, Activity } from 'src/@types';
 import { activities } from 'src/constants/activities';
 import { openai } from 'src/configs/openai';
 
-export async function getSportActivitySuggestion(indicator: Indicator): Promise<Activity> {
+export async function getSportActivitySuggestion(indicator: Indicator, lastActivity): Promise<Activity> {
   const systemPrompt = `
   You will be provided with indicators as age, weight, height and lifestyle, and your task is to return sports activity plan in JSON format depends on those indicators.
   The plan should include the type of activity, the duration in minutes, a good description of how to do the activity, the recommended water consumption in milliliters, and the plan like step by step what to do during the activity.
@@ -29,12 +29,13 @@ export async function getSportActivitySuggestion(indicator: Indicator): Promise<
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
+      { role: 'user', content: 'What is the plan?' },
     ],
     model: 'gpt-3.5-turbo',
     temperature: 0.9,
   });
 
-  console.log(completion)
+
 
   return JSON.parse(completion.choices[0].message.content || '{}');
 }
