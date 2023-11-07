@@ -7,29 +7,23 @@ export async function getSportActivitySuggestion(
   lastActivity?: Activity
 ): Promise<Activity & ActivityDescription> {
   const systemPrompt = `
-  You will be provided with indicators
-  as age, weight, height, lifestyle
-  and previous activity type with
-  duration if the exist,
-  and your task is to return sports
-  activity plan in JSON format depends on those indicators.
-  The plan should include the type of activity,
-  the duration in minutes, a good description
-  of how to do the activity, the recommended
-  water consumption in milliliters,
-  and the plan like step by step
-  what to do during the activity.
-  
-  Example of the response:
-  {
-    "activity_type": ${activities.sort(() => Math.random() - 0.5).join(' || ')},
-    "duration": 30,
-    "description": "A continuous run at a moderate pace to improve cardiovascular endurance.",
-    "water_consume": 500
-    "distance": 3000,
-    "explanation_why": "The explanation why this activity is good for you based on you previous activity and indicators",
-    "plan: ["First step description", "Second step description", "Third step description"]
-  }
+    You will be provided with indicators as age, weight, height, lifestyle
+    and previous activity type with duration if the exist,
+    and your task is to return sports activity plan in JSON format depends on those indicators.
+    The plan should include the type of activity, the duration in minutes, a good description
+    of how to do the activity, the recommended water consumption in milliliters,
+    and the plan like step by step what to do during the activity.
+    
+    Example of the response:
+    {
+      "activity_type": ${activities.sort(() => Math.random() - 0.5).join(' || ')},
+      "duration": 30,
+      "description": "A continuous run at a moderate pace to improve cardiovascular endurance.",
+      "water_consume": 500
+      "distance": 3000,
+      "explanation_why": "The explanation why this activity is good for you based on you previous activity and indicators",
+      "plan: ["First step description", "Second step description", "Third step description"]
+    }
   `;
 
   const lastActivityMessage = lastActivity
