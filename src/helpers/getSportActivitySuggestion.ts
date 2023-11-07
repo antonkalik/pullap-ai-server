@@ -27,6 +27,7 @@ export async function getSportActivitySuggestion(
     "description": "A continuous run at a moderate pace to improve cardiovascular endurance.",
     "water_consume": 500
     "distance": 3000,
+    "explanation_why": "The explanation why this activity is good for you based on you previous activity and indicators",
     "plan: ["First step description", "Second step description", "Third step description"]
   }
   `;
