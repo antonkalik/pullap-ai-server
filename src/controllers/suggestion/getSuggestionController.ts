@@ -1,11 +1,20 @@
 import { Request, Response } from 'express';
 import { IndicatorModel } from 'src/models/IndicatorModel';
+import { ActivityModel } from 'src/models/ActivityModel';
 import { getSportActivitySuggestion } from 'src/helpers/getSportActivitySuggestion';
 
 export const getSuggestionController = async (req: Request, res: Response) => {
   try {
     const [indicator] = await IndicatorModel.findAllByUserId(req.user.id);
-    const result = await getSportActivitySuggestion(indicator);
+    const [lastActivity] = await ActivityModel.findAllByUserId(req.user.id);
+
+    const result = await getSportActivitySuggestion(indicator, lastActivity);
+
+    await ActivityModel.insert({
+      activity_type: result.activity_type,
+      duration: result.duration,
+      user_id: req.user.id,
+    });
 
     res.json({
       data: result,

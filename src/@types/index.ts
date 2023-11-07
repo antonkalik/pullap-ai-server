@@ -37,11 +37,14 @@ export interface User extends DatabaseDate {
   role: Role;
 }
 
-export type Activity = {
-  activity_type: string;
-  duration: number;
+export type ActivityDescription = {
   description: string;
   water_consume: number;
   distance?: number;
   plan: string[];
+}
+
+export type Activity = {
+  activity_type: string;
+  duration: number;
 };
