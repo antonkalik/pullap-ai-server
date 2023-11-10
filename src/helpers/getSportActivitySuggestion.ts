@@ -41,8 +41,6 @@ export async function getSportActivitySuggestion(
   ${lastActivityMessage}
   `;
 
-  console.log('userPrompt', userPrompt);
-
   const completion = await openai.chat.completions.create({
     messages: [
       { role: 'system', content: systemPrompt },
