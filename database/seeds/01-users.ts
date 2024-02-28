@@ -12,7 +12,7 @@ exports.seed = async function (knex: Knex) {
   await knex(tableName).del();
   const users: Omit<User, 'id' | 'password' | 'created_at' | 'updated_at'>[] = [
     ...Array(10).keys(),
-  ].map(key => ({
+  ].map(() => ({
     email: faker.internet.email().toLowerCase(),
     first_name: faker.person.firstName(),
     last_name: faker.person.lastName(),

@@ -42,9 +42,12 @@ export type ActivityDescription = {
   water_consume: number;
   distance?: number;
   plan: string[];
-}
+};
 
 export type Activity = {
+  id: number;
   activity_type: string;
+  is_completed: boolean;
   duration: number;
+  created_at: Date;
 };

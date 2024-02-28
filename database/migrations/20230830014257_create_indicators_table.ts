@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { LifeStyle } from "../../src/constants/indicators";
+import { LifeStyle } from '../../src/constants/indicators';
 
 const tableName = 'indicators';
 

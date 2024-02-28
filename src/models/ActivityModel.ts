@@ -1,5 +1,5 @@
 import { Model } from 'src/models/Model';
-import type { Activity, Indicator } from "src/@types";
+import type { Activity } from 'src/@types';
 
 export class ActivityModel extends Model {
   static tableName = 'activities';

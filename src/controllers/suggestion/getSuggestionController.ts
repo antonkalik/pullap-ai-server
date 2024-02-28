@@ -8,11 +8,19 @@ export const getSuggestionController = async (req: Request, res: Response) => {
     const [indicator] = await IndicatorModel.findAllByUserId(req.user.id);
     const [lastActivity] = await ActivityModel.findAllByUserId(req.user.id);
 
+    if (lastActivity && !lastActivity.is_completed) {
+      res.json({
+        data: lastActivity,
+      });
+      return;
+    }
+
     const result = await getSportActivitySuggestion(indicator, lastActivity);
 
     await ActivityModel.insert({
       activity_type: result.activity_type,
       duration: result.duration,
+      is_completed: false,
       user_id: req.user.id,
     });
 
